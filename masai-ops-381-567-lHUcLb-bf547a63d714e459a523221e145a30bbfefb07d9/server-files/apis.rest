@@ -1,0 +1,135 @@
+GET http://localhost:9090/departments
+
+###
+
+POST http://localhost:9090/departments
+Content-Type: application/json
+
+{
+    "name": "Student"
+}
+
+###
+
+GET http://localhost:9090/departments
+
+###
+
+POST http://localhost:9090/departments
+Content-Type: application/json
+
+{
+    "id": 5,
+    "name": "Students"
+}
+
+###
+POST http://localhost:9090/users/register
+Content-Type: application/json
+
+{
+    "username": "sachin",
+    "firstname": "sachin",
+    "lastname": "singh",
+    "email": "admin@mail.com",
+    "password": "sachin",
+    "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/762.jpg",
+    "userLevel": 4
+}
+###
+
+DELETE http://localhost:9090/users/52
+
+###
+POST http://localhost:9090/user/register
+Content-Type: application/json
+
+{
+    "username": "Hello2",
+    "firstname": "Hello1",
+    "lastname": "Singh",
+    "email": "Lottie.Macejkovic69@yahoo.com",
+    "password": "Hello1",
+    "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/850.jpg"
+}
+###
+/*{
+  "username": "Hello1",
+  "password": "$2b$10$lSfxSjHZhUKtOse1XJBxWOzyIRKyfqHuJb7XU6gQCXmC1mjAx7BnC",
+  "email": "Lottie.Macejkovic69@yahoo.com",
+  "firstname": "Hello1",
+  "lastname": "Singh",
+  "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/850.jpg",
+  "createdAt": 1703307414715,
+  "id": 56
+}*/
+
+
+
+###
+
+POST http://localhost:9090/user/login
+Content-Type: application/json
+
+{
+  "username": "qwerty",
+  "password": "12345"
+}
+
+###
+ #"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXIiLCJwYXNzd29yZCI6IiQyYiQxMCQ3RTlhVFJwWTdndkhhN1plVmdWNVUucHE1WThKNTdlUGxSR2F6WnYyZkt6MThCYVlPczlnRyIsImVtYWlsIjoiTG90dGllLk1hY2Vqa292aWM2OUB5YWhvby5jb20iLCJmaXJzdG5hbWUiOiJIZWxsbzEiLCJsYXN0bmFtZSI6IlNpbmdoIiwiYXZhdGFyIjoiaHR0cHM6Ly9jbG91ZGZsYXJlLWlwZnMuY29tL2lwZnMvUW1kM1c1RHVoZ0hpckxIR1ZpeGk2Vjc2TGhDa1pVejZwbkZ0NUFKQml5dkh5ZS9hdmF0YXIvODUwLmpwZyIsImNyZWF0ZWRBdCI6MTcwMzMwODM4MzQ2MSwiaWQiOjU3LCJpYXQiOjE3MDMzMDkzNDcsImV4cCI6MTcwMzMzMDk0N30.IQtyqNEfuELHHJYac2XOPIZw37anmLUaiSWlemSeOwk"
+
+ ###
+GET http://localhost:9090/orders
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXJ0eSIsInBhc3N3b3JkIjoiJDJiJDEwJGY1d2U4Z0FnMC5hVEw1cTJCNkJycS5pMDlzdnNQaHJ2STFDajNYOVRPL3lTd1V1eFI2Wi9LIiwiZW1haWwiOiJxd2VydHl1IiwiZmlyc3RuYW1lIjoicXdlcnR5IiwibGFzdG5hbWUiOiJxd2VydHkiLCJhdmF0YXIiOiJodHRwczovL2Nsb3VkZmxhcmUtaXBmcy5jb20vaXBmcy9RbWQzVzVEdWhnSGlyTEhHVml4aTZWNzZMaENrWlV6NnBuRnQ1QUpCaXl2SHllL2F2YXRhci84NTAuanBnIiwiY3JlYXRlZEF0IjoxNzAzMzUxMzY3Njc4LCJpZCI6NjQsImlhdCI6MTcwMzM1MTQxMiwiZXhwIjoxNzAzMzczMDEyfQ.GpXRi11z0JGMFQ03_ZUF-4T6INRmC3UbGMv6Rx1d-5k
+
+###
+
+POST http://localhost:9090/user/login
+Content-Type: application/json
+
+{
+    "username":"qwer",
+    "password": "Hello1"
+}
+
+###
+
+GET http://localhost:9090/orders
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXIiLCJwYXNzd29yZCI6IiQyYiQxMCQ3RTlhVFJwWTdndkhhN1plVmdWNVUucHE1WThKNTdlUGxSR2F6WnYyZkt6MThCYVlPczlnRyIsImVtYWlsIjoiTG90dGllLk1hY2Vqa292aWM2OUB5YWhvby5jb20iLCJmaXJzdG5hbWUiOiJIZWxsbzEiLCJsYXN0bmFtZSI6IlNpbmdoIiwiYXZhdGFyIjoiaHR0cHM6Ly9jbG91ZGZsYXJlLWlwZnMuY29tL2lwZnMvUW1kM1c1RHVoZ0hpckxIR1ZpeGk2Vjc2TGhDa1pVejZwbkZ0NUFKQml5dkh5ZS9hdmF0YXIvODUwLmpwZyIsImNyZWF0ZWRBdCI6MTcwMzMwODM4MzQ2MSwiaWQiOjU3LCJpYXQiOjE3MDMzMTAxNDUsImV4cCI6MTcwMzMzMTc0NX0.9b1d657G5O7j3mhGsBUbX1ffG1PBeaghOUfJB1jZktQ
+
+###
+GET http://localhost:9090/orders?_limit=2
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXJ0eSIsInBhc3N3b3JkIjoiJDJiJDEwJGRSNURjc0ZXaDgzci5EcG9qNTNlTk9ySXMvNWtLUXlhWWM2LmZ4RFU4U0hQcnJmOEJHSk95IiwiZW1haWwiOiJxd2VydHlAcXdlci5jb20iLCJmaXJzdG5hbWUiOiJxd2VydHkiLCJsYXN0bmFtZSI6InF3ZXJ0eSIsImF2YXRhciI6Imh0dHBzOi8vY2xvdWRmbGFyZS1pcGZzLmNvbS9pcGZzL1FtZDNXNUR1aGdIaXJMSEdWaXhpNlY3NkxoQ2taVXo2cG5GdDVBSkJpeXZIeWUvYXZhdGFyLzg1MC5qcGciLCJjcmVhdGVkQXQiOjE3MDM5MzYyOTY2ODEsImlkIjo1MSwiaWF0IjoxNzAzOTM3Mjk5LCJleHAiOjE3MDM5NTg4OTl9.6pb46qgHOp-74Mb3lt4s33nQI7EtsB7XCFIk6A4g0Xc
+
+###
+
+PATCH http://localhost:9090/orders/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXIiLCJwYXNzd29yZCI6IiQyYiQxMCQ3RTlhVFJwWTdndkhhN1plVmdWNVUucHE1WThKNTdlUGxSR2F6WnYyZkt6MThCYVlPczlnRyIsImVtYWlsIjoiTG90dGllLk1hY2Vqa292aWM2OUB5YWhvby5jb20iLCJmaXJzdG5hbWUiOiJIZWxsbzEiLCJsYXN0bmFtZSI6IlNpbmdoIiwiYXZhdGFyIjoiaHR0cHM6Ly9jbG91ZGZsYXJlLWlwZnMuY29tL2lwZnMvUW1kM1c1RHVoZ0hpckxIR1ZpeGk2Vjc2TGhDa1pVejZwbkZ0NUFKQml5dkh5ZS9hdmF0YXIvODUwLmpwZyIsImNyZWF0ZWRBdCI6MTcwMzMwODM4MzQ2MSwiaWQiOjU3LCJpYXQiOjE3MDMzMTAxNDUsImV4cCI6MTcwMzMzMTc0NX0.9b1d657G5O7j3mhGsBUbX1ffG1PBeaghOUfJB1jZktQ
+
+{
+    "name":"sachin"
+}
+###
+POST http://localhost:9090/orders
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXJ0eSIsInBhc3N3b3JkIjoiJDJiJDEwJGRSNURjc0ZXaDgzci5EcG9qNTNlTk9ySXMvNWtLUXlhWWM2LmZ4RFU4U0hQcnJmOEJHSk95IiwiZW1haWwiOiJxd2VydHlAcXdlci5jb20iLCJmaXJzdG5hbWUiOiJxd2VydHkiLCJsYXN0bmFtZSI6InF3ZXJ0eSIsImF2YXRhciI6Imh0dHBzOi8vY2xvdWRmbGFyZS1pcGZzLmNvbS9pcGZzL1FtZDNXNUR1aGdIaXJMSEdWaXhpNlY3NkxoQ2taVXo2cG5GdDVBSkJpeXZIeWUvYXZhdGFyLzg1MC5qcGciLCJjcmVhdGVkQXQiOjE3MDM5MzYyOTY2ODEsImlkIjo1MSwiaWF0IjoxNzAzOTM3Mjk5LCJleHAiOjE3MDM5NTg4OTl9.6pb46qgHOp-74Mb3lt4s33nQI7EtsB7XCFIk6A4g0Xc
+
+{
+   "task":"lecture",
+    "completed":false
+}
+
+###
+
+PATCH http://localhost:9090/orders/GXV2ZUFjaY
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXJ0eSIsInBhc3N3b3JkIjoiJDJiJDEwJGRSNURjc0ZXaDgzci5EcG9qNTNlTk9ySXMvNWtLUXlhWWM2LmZ4RFU4U0hQcnJmOEJHSk95IiwiZW1haWwiOiJxd2VydHlAcXdlci5jb20iLCJmaXJzdG5hbWUiOiJxd2VydHkiLCJsYXN0bmFtZSI6InF3ZXJ0eSIsImF2YXRhciI6Imh0dHBzOi8vY2xvdWRmbGFyZS1pcGZzLmNvbS9pcGZzL1FtZDNXNUR1aGdIaXJMSEdWaXhpNlY3NkxoQ2taVXo2cG5GdDVBSkJpeXZIeWUvYXZhdGFyLzg1MC5qcGciLCJjcmVhdGVkQXQiOjE3MDM5MzYyOTY2ODEsImlkIjo1MSwiaWF0IjoxNzAzOTM3Mjk5LCJleHAiOjE3MDM5NTg4OTl9.6pb46qgHOp-74Mb3lt4s33nQI7EtsB7XCFIk6A4g0Xc
+
+{
+    "task":"lectures"
+}

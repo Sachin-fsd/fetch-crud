@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="./styles/normalize.css" />
+    <link rel="stylesheet" href="./styles/skeleton.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <title>Student Database</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Title here...</h1>
+          <p>Description here if required.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="columns four sidebar-one" id="sidebar-one">
+          <h4>Add Task</h4>
+          <input
+            type="text"
+            id="task_name"
+            class="u-full-width"
+            placeholder="Task Name"
+          />
+          <select name="status" id="completed">
+            <option value="" hidden>Status</option>
+            <option value="true">Completed</option>
+            <option value="false">Not Complete</option>
+          </select>
+
+          <button id="add_task" class="u-full-width button button-primary">
+            Add Task
+          </button>
+          <hr />
+
+          <h4>Sort Based On Name</h4>
+          <button
+            id="sort-A-Z"
+            class="u-full-width button button-primary"
+            placeholder="Sort A-Z"
+          >
+            Sort A-Z
+          </button>
+          <button
+            id="sort-Z-A"
+            class="u-full-width button button-primary"
+            placeholder="Sort Z-A"
+          >
+            Sort Z-A
+          </button>
+          <hr />
+
+          <h4>Filter By Score</h4>
+          <button
+            id="greater-than"
+            class="u-full-width button button-primary"
+            placeholder="Student Name"
+          >
+            Score >= 5
+          </button>
+          <button
+            id="less-than"
+            class="u-full-width button button-primary"
+            placeholder="Student Name"
+          >
+            Score < = 5
+          </button>
+          <hr />
+
+          <h4>fetch tasks</h4>
+          <select name="" id="fetch_num">
+            <option value="" hidden>Fetch Number of tasks</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="10">10</option>
+          </select>
+          <hr />
+        </div>
+        <div class="columns eight main-section" id="main-section">
+          <!-- nothing here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="./scripts/index.js"></script> -->
+  </body>
+</html>
+
+<script>
+  var edit_btn;
+  // Tasks fetching
+  async function all_tasks(limit = 10) {
+    let tasks = await fetch(`http://localhost:9090/orders?_limit=${limit}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+      method: "GET",
+    });
+
+    let fetched_tasks = await tasks.json();
+
+    let main = document.getElementById("main-section");
+    main.innerHTML = ``;
+    let inside = fetched_tasks
+      .map((item) => {
+        return `<div class="task" >
+        <div class="content">
+            <input type="text"  class="text" readonly value=${item.task}>
+        </div>
+        <div class="actions">
+            <button style="background-color:${item.completed?"green":"#f16b3e"}; color:"white"}" class="toogle" data-id=${item.id} data-completed=${
+          item.completed
+        }>${item.completed ? "completed" : "Not complete"}</button>
+            <button class="edit" data-id=${item.id} >EDIT</button>
+            <button class="delete" data-id=${item.id} >DELETE</button>
+        </div>
+    </div>`;
+      })
+      .join("");
+    main.innerHTML = inside;
+
+    edit_btn = document.querySelectorAll("button.edit");
+    for (let btn of edit_btn) {
+      btn.addEventListener("click", (event) => edit(event));
+    }
+  }
+
+  all_tasks();
+
+  let add_task = document.getElementById("add_task");
+  add_task.addEventListener("click", async () => {
+    let name = document.getElementById("task_name").value;
+    let status = document.getElementById("completed").value;
+
+    let name_check = /^[A-Za-z._ ]{1,}$/;
+    if (!name_check.test(name)) {
+      alert("invalid name");
+      return;
+    }
+
+    if (status.toLowerCase() == "true") {
+      status = true;
+    } else {
+      status = false;
+    }
+
+    let obj = {
+      task: name,
+      completed: status,
+    };
+
+    try {
+      let posted = await fetch("http://localhost:9090/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(obj),
+      });
+
+      if (posted.ok) {
+        alert("Task Added successfully");
+        all_tasks();
+      }
+    } catch (error) {
+      alert("Error");
+    }
+  });
+
+  let fetch_num = document.getElementById("fetch_num");
+
+  fetch_num.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    all_tasks(Number(event.target.value));
+  });
+
+  async function edit(event) {
+    try {
+      let task =
+        event.target.parentElement.parentElement.children[0].childNodes[1];
+      // console.log(task);
+      task.removeAttribute("readonly");
+      task.focus();
+
+      // console.log(event.target.dataset.id);
+
+      if (event.target.innerText == "EDIT") {
+        event.target.innerText = "SAVE";
+      } else {
+        let update = await fetch(
+          `http://localhost:9090/orders/${event.target.dataset.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify({ task: `${task.value}` }),
+          }
+        );
+        let res = await update.json();
+
+        if (update.ok) {
+          alert("Task updated successfully");
+          task.setAttribute("readonly",true);
+        }
+      }
+    } catch (error) {
+      alert("Error");
+      console.log(error);
+    }
+  }
+</script>
